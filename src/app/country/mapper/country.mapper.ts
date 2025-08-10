@@ -8,6 +8,7 @@ export class CountryMapper {
       flag: restCountry.flag,
       flagSvg: restCountry.flags.svg,
       name: restCountry.name.common,
+      spanishName: restCountry.translations?.["spa"]?.official,
       capital: restCountry.capital.join(','),
       population: restCountry.population
     }
