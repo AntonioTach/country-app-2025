@@ -10,7 +10,9 @@ export class CountryMapper {
       name: restCountry.name.common,
       spanishName: restCountry.translations?.["spa"]?.official,
       capital: restCountry.capital.join(','),
-      population: restCountry.population
+      population: restCountry.population,
+      region: restCountry.region,
+      subRegion: restCountry.subregion
     }
   }
 

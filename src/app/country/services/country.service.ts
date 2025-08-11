@@ -19,6 +19,7 @@ export class CountryService {
     return this.http.get<RESTCountry[]>(`${API_URL}/capital/${query}`)
     .pipe(
       map(countries => CountryMapper.mapRestCountriesArrayToCountriesArray(countries)),
+      delay(1500),
       catchError((err: Error) => {
         return throwError(() => new Error(`Error fetching countries with query ${query}`));
       })
@@ -34,6 +35,18 @@ export class CountryService {
       delay(1500),
       catchError((err: Error) => {
         return throwError(() => new Error(`Error fetching country with query ${query}`));
+      })
+    )
+  }
+
+  searchCountryByCode(code: string) {
+    return this.http.get<RESTCountry[]>(`${API_URL}/alpha/${code}`)
+    .pipe(
+      map(countries => CountryMapper.mapRestCountriesArrayToCountriesArray(countries)),
+      map(countries => countries.at(0)),
+      delay(1500),
+      catchError((err: Error) => {
+        return throwError(() => new Error(`Error fetching country with query ${code}`));
       })
     )
   }

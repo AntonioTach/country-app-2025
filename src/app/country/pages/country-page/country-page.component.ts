@@ -1,9 +1,26 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { CountryService } from './../../services/country.service';
+import { Component, inject } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { ActivatedRoute } from '@angular/router';
+import { Country } from '../../interfaces/country.interface';
+import { NotFoundComponent } from "../../../shared/components/not-found/not-found.component";
+import { CountryInformationComponent } from "./country-information/country-information.component";
 
 @Component({
   selector: 'app-country-page',
-  imports: [],
+  imports: [NotFoundComponent, CountryInformationComponent],
   templateUrl: './country-page.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CountryPageComponent { }
+export class CountryPageComponent {
+  countryCode = inject(ActivatedRoute).snapshot.params['code'];
+  countryService = inject(CountryService);
+
+  countryResource = rxResource<Country | undefined, {code: string}>({
+    params: () => ({ code: this.countryCode }),
+    stream: ({ params }) => {
+      return this.countryService.searchCountryByCode(params.code)
+    }
+  });
+
+
+}

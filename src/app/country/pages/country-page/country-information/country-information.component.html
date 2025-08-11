@@ -1,0 +1,58 @@
+<section class="mx-10 my-6">
+  <div
+    class="card lg:card-side bg-base-100 shadow-xl border border-base-200 hover:shadow-2xl transition-shadow duration-300"
+  >
+    <!-- Imagen de bandera -->
+    <figure class="lg:w-1/3 bg-base-200">
+      <img
+        [src]="country().flagSvg"
+        [alt]="country().name + ' flag'"
+        class="h-full w-full object-cover"
+      />
+    </figure>
+
+    <!-- Contenido -->
+    <div class="card-body">
+      <!-- Header con avatar y nombre -->
+      <div class="flex items-center gap-4">
+        <div class="avatar">
+          <div class="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+            <img [src]="country().flagSvg" [alt]="country().name" />
+          </div>
+        </div>
+        <div>
+          <h1 class="text-3xl font-bold flex items-center gap-2">
+            {{ country().spanishName || country().name }}
+            <span class="badge badge-primary">{{ country().cca2 }}</span>
+          </h1>
+          <p class="opacity-70">{{ country().capital }}</p>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Stats -->
+      <div class="stats shadow w-full">
+        <div class="stat">
+          <div class="stat-title">Poblation</div>
+          <div class="stat-value">{{ country().population | number }}</div>
+          <div class="stat-desc">From {{ currentYear() }}</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-title">Capital</div>
+          <div class="stat-value text-primary">{{ country().capital }}</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-title">Region</div>
+          <div class="stat-value text-primary">{{ country().region }}</div>
+          <div class="stat-desc">Subregion {{ country().subRegion }}</div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+    </div>
+  </div>
+</section>
