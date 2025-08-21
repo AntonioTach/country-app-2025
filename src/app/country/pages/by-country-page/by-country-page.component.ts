@@ -34,6 +34,6 @@ export class ByCountryPageComponent {
     if (!params.query) return of([]);
     return this.countryService.searchByCountry(params.query);
   },
-});
+  });
 
 }
